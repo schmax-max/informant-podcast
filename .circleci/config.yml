@@ -2,7 +2,7 @@
 node_image: &node_image
   working_directory: ~/project
   docker:
-  - image: circleci/node:10.10
+  - image: circleci/node:10.13
 
 gcp_image: &gcp_image
   working_directory: ~/project
