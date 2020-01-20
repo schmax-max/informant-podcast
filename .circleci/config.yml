@@ -1,0 +1,151 @@
+
+node_image: &node_image
+  working_directory: ~/project
+  docker:
+  - image: circleci/node:10.10
+
+gcp_image: &gcp_image
+  working_directory: ~/project
+  docker:
+  - image: google/cloud-sdk
+
+attach: &attach
+  attach_workspace:
+    at: ~/project
+
+persist: &persist
+  persist_to_workspace:
+      root: .
+      paths: .
+
+decrypt: &decrypt
+  run:
+    name: 'Decrypt environment variables'
+    command: gcloud kms decrypt --ciphertext-file=./env.enc --plaintext-file=./.env --location=global --keyring=storage --key=jimmykey --project=logical-river-230700
+
+gcp_auth_core: &gcp_auth_core
+  run:
+    name: Authenticate service account
+    command: |
+      echo ${GCLOUD_SERVICE_KEY_CORE} | gcloud auth activate-service-account --key-file=-
+      gcloud --quiet config set project ${GOOGLE_PROJECT_ID_CORE}
+      gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+
+gcp_auth_core_qa: &gcp_auth_core_qa
+  run:
+    name: Authenticate service account
+    command: |
+      echo ${GCLOUD_SERVICE_KEY_CORE_QA} | gcloud auth activate-service-account --key-file=-
+      gcloud --quiet config set project ${GOOGLE_PROJECT_ID_CORE_QA}
+      gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+
+restore_cache: &restore_cache
+  restore_cache:
+    keys:
+    - v1-dependencies-{{ checksum "package.json" }}
+    # fallback to using the latest cache if no exact match is found
+    - v1-dependencies-
+
+version: 2
+jobs:
+  install_dependencies:
+    <<: *node_image
+    steps:
+    - checkout
+    - *attach
+    - *restore_cache
+    - run: yarn install
+    - save_cache:
+        paths:
+        - node_modules
+        key: v1-dependencies-{{ checksum "package.json" }}
+    - *persist
+
+  run_unit_tests:
+    <<: *node_image
+    steps:
+    - *attach
+    - run: yarn test
+
+  env_qa:
+    <<: *gcp_image
+    steps:
+    - *attach
+    - *gcp_auth_core_qa
+    - run:
+        name: 'Get environment variables'
+        command: gsutil cp gs://jimmy-b/envMicroQa.enc ./env.enc
+    - *decrypt
+    - *persist
+
+  env_prod:
+    <<: *gcp_image
+    steps:
+    - *attach
+    - *gcp_auth_core
+    - run:
+        name: 'Get environment variables'
+        command: gsutil cp gs://jimmy-b/envMicroProd.enc ./env.enc
+    - *decrypt
+    - *persist
+
+  deploy_qa:
+    <<: *gcp_image
+    steps:
+    - *attach
+    - *gcp_auth_core_qa
+    - run: gcloud app deploy app.yaml
+
+  deploy_prod:
+    <<: *gcp_image
+    steps:
+    - *attach
+    - *gcp_auth_core
+    - run: gcloud app deploy app.yaml
+
+workflows:
+  version: 2
+  continuos_integration:
+    jobs:
+      - install_dependencies
+      
+      - run_unit_tests:
+          requires:
+          - install_dependencies
+          # context: micro
+      
+      # - env_qa:
+      #     requires:
+      #     - install_dependencies
+      #     # - run_unit_tests
+      
+      # - deploy_qa:
+      #     requires:
+      #     # - env_qa
+      #     - install_dependencies
+      #     - run_unit_tests
+
+      # - env_prod:
+      #     requires:
+      #     - install_dependencies
+      #     - run_unit_tests
+      
+      - deploy_prod:
+          requires:
+          - install_dependencies
+          - run_unit_tests
+          # - env_prod
+          filters:
+            branches:
+              only:
+                - master
+
+# gcloud kms encrypt \
+#   --location global \
+#   --keyring storage \
+#   --key jimmykey \
+#   --plaintext-file .envMicroQa \
+#   --ciphertext-file envMicroQa.enc
+
+# gcloud kms decrypt --ciphertext-file=./envMicroQa.enc --plaintext-file=./.env --key=jimmykey --keyring=storage --location=global --project=logical-river-230700
+# gcloud kms encrypt --ciphertext-file=./envMicroProd.enc --plaintext-file=./.envMicroProd --key=jimmykey --keyring=storage --location=global --project=logical-river-230700

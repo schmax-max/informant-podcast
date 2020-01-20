@@ -1,11 +1,9 @@
 const axios = require('axios')
 const URL = require('url')
 
-const url = 'https://www.africanews.com/'
+module.exports = {links}
 
-module.exports = {fetchLinks}
-
-async function fetchLinks (url) {
+async function links (url) {
   const {data} = await axios({
     method: 'get',
     url: url,
