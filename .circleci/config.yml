@@ -27,10 +27,11 @@ gcp_auth_core: &gcp_auth_core
   run:
     name: Authenticate service account
     command: |
-      echo ${GCLOUD_SERVICE_KEY_CORE} | gcloud auth activate-service-account [${GCLOUD_SERVICE_ACCOUNT}] --key-file=-
+      echo ${GCLOUD_SERVICE_KEY_CORE} | gcloud auth activate-service-account --key-file=-
       gcloud --quiet config set project ${GOOGLE_PROJECT_ID_CORE}
       gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 
+#  [${GCLOUD_SERVICE_ACCOUNT}]
 gcp_auth_core_qa: &gcp_auth_core_qa
   run:
     name: Authenticate service account
