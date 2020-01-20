@@ -9,7 +9,6 @@ async function links (url) {
     url: url,
     timeout: 0.2 * 60 * 1000 // every 0.2 minutes
   })
-  
 
   const {hostname} = URL.parse(url)
   const protocol = url.split('://')[0]
