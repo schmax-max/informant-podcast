@@ -23,8 +23,8 @@ app.post('/links', trigger);
 // https://www.freecodecamp.org/news/how-to-make-input-validation-simple-and-clean-in-your-express-js-app-ea9b5ff5a8a7/
 
 async function trigger (req, res, next) {
-  const {url} = req.body
-  const response = await links(url)
+  const {sourceUrl} = req.body
+  const response = await links(sourceUrl)
   res.send(response)
 }
 
