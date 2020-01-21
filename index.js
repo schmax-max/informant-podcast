@@ -6,7 +6,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const errorHandler = require('./helpers/error-handler');
 
-const {links} = require('./svc/_links');
+const {links} = require('./svc');
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
