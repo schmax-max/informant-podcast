@@ -1,5 +1,6 @@
 runtime: nodejs10
-service: links
+service: calcs-algo
+
 # entrypoint: npm run start
 
 # instance_class: F1

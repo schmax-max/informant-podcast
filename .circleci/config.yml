@@ -1,4 +1,3 @@
-
 node_image: &node_image
   working_directory: ~/project
   docker:
@@ -31,7 +30,8 @@ gcp_auth_core: &gcp_auth_core
       gcloud --quiet config set project ${GOOGLE_PROJECT_ID_CORE}
       gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 
-#  [${GCLOUD_SERVICE_ACCOUNT}]
+# [${GCLOUD_SERVICE_ACCOUNT}]
+
 gcp_auth_core_qa: &gcp_auth_core_qa
   run:
     name: Authenticate service account
@@ -68,25 +68,25 @@ jobs:
     - *attach
     - run: yarn test
 
-  env_qa:
+  pre_deploy_qa:
     <<: *gcp_image
     steps:
     - *attach
     - *gcp_auth_core_qa
     - run:
         name: 'Get environment variables'
-        command: gsutil cp gs://jimmy-b/envMicroQa.enc ./env.enc
+        command: gsutil cp gs://jimmy-b/envQa.enc ./env.enc
     - *decrypt
     - *persist
 
-  env_prod:
+  pre_deploy_prod:
     <<: *gcp_image
     steps:
     - *attach
     - *gcp_auth_core
     - run:
         name: 'Get environment variables'
-        command: gsutil cp gs://jimmy-b/envMicroProd.enc ./env.enc
+        command: gsutil cp gs://jimmy-b/envProd.enc ./env.enc
     - *decrypt
     - *persist
 
@@ -113,40 +113,29 @@ workflows:
       - run_unit_tests:
           requires:
           - install_dependencies
-          # context: micro
+          context: micro-qa
       
-      # - env_qa:
+      # - pre_deploy_qa:
       #     requires:
-      #     - install_dependencies
-      #     # - run_unit_tests
-      
-      # - deploy_qa:
-      #     requires:
-      #     # - env_qa
       #     - install_dependencies
       #     - run_unit_tests
 
-      # - env_prod:
+      # - deploy_qa:
       #     requires:
-      #     - install_dependencies
+      #     - pre_deploy_qa
       #     - run_unit_tests
+
+      - pre_deploy_prod:
+          requires:
+          - install_dependencies
+          - run_unit_tests
       
       - deploy_prod:
           requires:
           - install_dependencies
           - run_unit_tests
-          # - env_prod
+          - pre_deploy_prod
           filters:
             branches:
               only:
                 - master
-
-# gcloud kms encrypt \
-#   --location global \
-#   --keyring storage \
-#   --key jimmykey \
-#   --plaintext-file .envMicroQa \
-#   --ciphertext-file envMicroQa.enc
-
-# gcloud kms decrypt --ciphertext-file=./envMicroQa.enc --plaintext-file=./.env --key=jimmykey --keyring=storage --location=global --project=logical-river-230700
-# gcloud kms encrypt --ciphertext-file=./envMicroProd.enc --plaintext-file=./.envMicroProd --key=jimmykey --keyring=storage --location=global --project=logical-river-230700
