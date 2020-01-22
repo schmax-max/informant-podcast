@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const {sherpa} = require('./svc');
+const {links} = require('./svc');
 
-router.post('/sherpa', trigger);
+router.post('/links', trigger);
 
 async function trigger (req, res, next) {
-  const {links} = req.body
-  const response = await sherpa(links)
+  const {sourceUrl} = req.body
+  const response = await links(sourceUrl)
   res.send(response)
 }
 

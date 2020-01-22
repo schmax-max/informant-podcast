@@ -1,5 +1,5 @@
 runtime: nodejs10
-service: calcs-algo
+service: links-generic
 
 # entrypoint: npm run start
 
