@@ -1,13 +1,5 @@
 runtime: nodejs10
-service: links-generic
-
-# entrypoint: npm run start
-
-# instance_class: F1
-# automatic_scaling:
-#   max_idle_instances: 1
-#   max_instances: 1
-
+service: urls-generic
 handlers:
 - url: /.*
   secure: always
