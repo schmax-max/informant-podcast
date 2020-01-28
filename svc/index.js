@@ -1,9 +1,9 @@
 const axios = require('axios')
 const URL = require('url')
 
-module.exports = {links}
+module.exports = {master}
 
-async function links (url) {
+async function master (url) {
   const {data} = await axios({
     method: 'get',
     url: url,
