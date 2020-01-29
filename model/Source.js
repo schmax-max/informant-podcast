@@ -11,23 +11,26 @@ const schema = new mongoose.Schema( {
     name: {
         type: "string"
     },
-    channel_url: {
+    source_url: {
+        type: "string"
+    },
+    source_domain: {
         type: "string"
     },
     created_at: {
         type: "date",
         format: "date-time"
     },
-    boolean_settings: {
+    boolean: {
         type: "object"
     },
     process_flags: {
         type: "object"
     },
-    curator_section_input: {
+    filtering: {
         type: "object"
     },
-    curator_archive_input: {
+    archive: {
         type: "object"
     }
 })
@@ -36,5 +39,8 @@ schema.set('toJSON', { virtuals: true });
 
 module.exports = {
     newsletters: mongoose.model(`source_newsletters`, schema),
-    backups: mongoose.model(`source_backups`, schema),
+    curators: mongoose.model(`source_curators`, schema),
+    publishers: mongoose.model(`source_publishers`, schema),
+    slugs: mongoose.model(`source_slugs`, schema),
+    photos: mongoose.model(`source_photos`, schema),
 };

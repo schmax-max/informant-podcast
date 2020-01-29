@@ -5,7 +5,7 @@ module.exports = postData
 
 async function postData (type, data, forceProdEnv) {
   const url = getApiUrl (type, forceProdEnv)
-  console.log({data, url})
+  // console.log({data, url})
   
   try {
     const response = await axios({

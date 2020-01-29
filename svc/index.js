@@ -7,16 +7,23 @@ const {Source} = require('../model')
 
 module.exports = {master}
 
-async function master () {
+async function master (body = {}) {
+  const {type} = body
+  perType(type)
+}
+
+
+
+async function perType (type = 'curators') {
   try {
-    const sources = await Source.newsletters.find()
+    const find = {'boolean_settings.is_ineffective': false}
+    const sources = await Source[type].find()
     let iterations = sources.length
     iterations = 1
     for (let i=0; i<iterations; i++) {
       const source = sources[i]
       const {perSource} = require('./perSource')
-      const response = await perSource(source)
-      console.log({response})
+      const response = await perSource(source, type)
     }
   } catch(e) {
     console.log({e})

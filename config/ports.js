@@ -11,6 +11,7 @@ const ports = {
   'calculator': 8081,
   'librarian': 8082,
   'helper-date': 8083,
+  'helper-links': 8084,
   
   'editor-bbh': 8090,
   'editor-search': 8091,
