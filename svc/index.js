@@ -1,32 +1,25 @@
+'use strict'
 const axios = require('axios')
 const URL = require('url')
-const {masterPerSource} = require('./masterPerSource')
+
+
+const {Source} = require('../model')
 
 module.exports = {master}
 
 async function master () {
-  
-  const {hostname} = URL.parse(url)
-  const protocol = url.split('://')[0]
-  const linkArray = data.split('href')
-  linkArray.shift()
-  const links = linkArray.reduce((arr, item) => {
-    item = item.split('"')[1]
-    if (item) {
-      item = item.split('"')[0]
-      if (!item.includes('http')) {
-        item = `${protocol}://${hostname}${item}`
-      }
-      if (checkIfContentUrl(item) && arr.indexOf(item) === -1) {
-        arr.push(item)
-      }
+  try {
+    const sources = await Source.newsletters.find()
+    let iterations = sources.length
+    iterations = 1
+    for (let i=0; i<iterations; i++) {
+      const source = sources[i]
+      const {perSource} = require('./perSource')
+      const response = await perSource(source)
+      console.log({response})
     }
-    return arr
-  }, [])
-  return links
-}
-
-
-function fetchAllSources () {
-  // TODO INSERT MODEL STUFF HERE
+  } catch(e) {
+    console.log({e})
+  }
+  return
 }

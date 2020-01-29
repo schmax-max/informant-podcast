@@ -26,14 +26,14 @@ describe('TEST: .... ||', () => {
         
         const channel = getTestData('dense_discovery')
 
-        const {outputLinks} = await processLatest(channel, {archive_url})
+        const {links} = await processLatest(channel, {archive_url})
         const resultUrls = [
             'https://medium.com/@alexstamos/techs-adversaries-vs-enemies-a5ca09e09aca',
             'https://www.theatlantic.com/magazine/archive/2020/01/before-zuckerberg-gutenberg/603034/',
             'https://edition.cnn.com/interactive/2019/05/europe/finland-fake-news-intl/'
         ]
-        expect(outputLinks).to.be.an('array').that.includes(resultUrls[0])
-        expect(outputLinks).to.be.an('array').that.includes(resultUrls[1])
-        expect(outputLinks).to.be.an('array').that.includes(resultUrls[2])
+        expect(links).to.be.an('array').that.includes(resultUrls[0])
+        expect(links).to.be.an('array').that.includes(resultUrls[1])
+        expect(links).to.be.an('array').that.includes(resultUrls[2])
     }).timeout(defaultTimeout)
 })

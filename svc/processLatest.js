@@ -5,7 +5,7 @@ const {postData} = require('../config')
 
 module.exports = {processLatest}
 
-async function processLatest (newsletterChannel, {archive_url, archive_date}) {
+async function processLatest (source, {archive_url, archive_date}) {
 console.log('starting processLatest')
     try {
         let apiResponse = await getApiResponse (archive_url)
@@ -13,13 +13,13 @@ console.log('starting processLatest')
         if (!archive_date) {
             archive_date = await getRecommendationDate (apiResponse, archive_url)  
         } 
-        apiResponse = getRelevantApiResponse (newsletterChannel, apiResponse)
-        const outputLinks = getOutputLinks (newsletterChannel, apiResponse)
+        apiResponse = getRelevantApiResponse (source, apiResponse)
+        const links = getLinks (source, apiResponse)
             
         return {
-            recommendationDate: archive_date,
-            outputLinks,
-            processedUrl: archive_url
+            archive_date,
+            archive_url,
+            links,
         }
     } catch(e) {
         console.log({e})
@@ -36,17 +36,17 @@ function extractPocketHits (inputLinks) {
   }, [])
   return outputLinks
 }
-function getOutputLinks (newsletterChannel, apiResponse) {
+function getLinks (source, apiResponse) {
     const {shortLinks} = getLinksFromApiResponse (apiResponse)
     let outputLinks = shortLinks || []
-    if (newsletterChannel.channel_url.includes('https://getpocket.com/explore/pocket-hits')) {
+    if (source.channel_url.includes('https://getpocket.com/explore/pocket-hits')) {
         outputLinks = extractPocketHits(outputLinks)
     }
     return outputLinks
 }
 
-function getRelevantApiResponse (newsletterChannel, apiResponse) {
-    const {beginning_identifier, end_identifier} = newsletterChannel.curator_section_input
+function getRelevantApiResponse (source, apiResponse) {
+    const {beginning_identifier, end_identifier} = source.curator_section_input
     if (beginning_identifier) {
         const relevantApiResponseBlock = apiResponse.split(beginning_identifier)[1]
         if (relevantApiResponseBlock) {

@@ -5,11 +5,11 @@ const {postData} = require('../config')
 
 module.exports = {getLatest}
 
-async function getLatest (newsletterChannel) {
-  const {channel_url} = newsletterChannel
+async function getLatest (source) {
+  const {channel_url} = source
   const apiResponse = await getApiResponse (channel_url)
   const archiveLinkChunks = getArchiveLinkChunks (apiResponse)
-  const archiveLinks = await getArchiveLinks (archiveLinkChunks, newsletterChannel)
+  const archiveLinks = await getArchiveLinks (archiveLinkChunks, source)
   if (!archiveLinkChunks) {
       console.log(`no archive link chunks for ${channel_url}`)
   }
@@ -17,11 +17,10 @@ async function getLatest (newsletterChannel) {
       console.log(`no archive links for ${channel_url}`)
   }
 
-  return identifyLatestUnprocessed (newsletterChannel, archiveLinks)
+  return identifyLatestUnprocessed (source, archiveLinks)
 }
 
 function getArchiveLinkChunks (apiResponse) {
-  // console.log({apiResponse})
   apiResponse = apiResponse.replace(/\\/g, "")
 
   const newLinkIndicators = [
@@ -44,20 +43,19 @@ function getArchiveLinkChunks (apiResponse) {
   return linkChunks
 }
 
-async function getArchiveLinks (archiveLinkChunks, newsletterChannel) {
-  // console.log({archiveLinkChunks})
-  const {channel_url} = newsletterChannel
+async function getArchiveLinks (archiveLinkChunks, source) {
+  const {channel_url} = source
 
   const {
       archive_prepend_slug, 
       archive_identifier_slug
-  } = newsletterChannel.curator_archive_input
+  } = source.curator_archive_input
 
   let linkArray = []
   
   for (let i=0; i<archiveLinkChunks.length; i++) {
       const item = archiveLinkChunks[i]
-      const {date, url} = await getDateAndUrl (channel_url, item)
+      let {date, url} = await getDateAndUrl (channel_url, item)
 
       if (archive_prepend_slug && !url.includes('http')) {
           url = `${archive_prepend_slug}${url}`
@@ -75,12 +73,8 @@ async function getArchiveLinks (archiveLinkChunks, newsletterChannel) {
           }
           linkArray.push(linkObject)
       }
-
   }
       
-
-  
-
   if (linkArray.length === 0) {
       const errorData = {channel_url, archive_identifier_slug}
       if (archiveLinkChunks.length > 0) {
@@ -147,15 +141,13 @@ async function getDateAndUrl (channel_url, item) {
   return {date, url}
 }
 
-function identifyLatestUnprocessed (newsletterChannel, archiveLinks) {
-//   console.log({archiveLinks})
+function identifyLatestUnprocessed (source, archiveLinks) {
   let response
   let processedUrls = []
-  if (newsletterChannel.process_flags && newsletterChannel.process_flags.processed_archive_urls) {
-      processedUrls = newsletterChannel.process_flags.processed_archive_urls.map((k) => { return k.archive_url })
+  if (source && source.process_flags && source.process_flags.processed_archive_urls) {
+      processedUrls = source.process_flags.processed_archive_urls.map((k) => { return k.archive_url })
   }
 
-  // console.log({processedUrls})
   const newLinks = archiveLinks.reduce((newArray, item) => {
       if (newArray.length === 0) {
           // console.log('here?')
@@ -171,10 +163,9 @@ function identifyLatestUnprocessed (newsletterChannel, archiveLinks) {
       archiveLinks.length > 0
       && newLinks.length === 0
   ) {
-      console.log(`all links already processed for ${newsletterChannel.channel_url}`)
+      console.log(`all links already processed for ${source.channel_url}`)
       response = 'completed'
   }
-  // console.log({response})
 
   return response
 }

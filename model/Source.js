@@ -8,20 +8,26 @@ const schema = new mongoose.Schema( {
     _id: {
         type: "ObjectId"
     },
+    name: {
+        type: "string"
+    },
+    channel_url: {
+        type: "string"
+    },
     created_at: {
         type: "date",
         format: "date-time"
     },
-    name: {
-        type: "string"
+    boolean_settings: {
+        type: "object"
     },
-    url: {
-        type: "string"
+    process_flags: {
+        type: "object"
     },
-    host: {
-        type: "string"
+    curator_section_input: {
+        type: "object"
     },
-    mbfc: {
+    curator_archive_input: {
         type: "object"
     }
 })
@@ -30,4 +36,5 @@ schema.set('toJSON', { virtuals: true });
 
 module.exports = {
     newsletters: mongoose.model(`source_newsletters`, schema),
+    backups: mongoose.model(`source_backups`, schema),
 };
