@@ -1,0 +1,302 @@
+{
+  "name" : "dense discovery newsletter",
+  "__v" : 4,
+  "_type" : "CuratorChannel",
+  "process_flags" : {
+      "processed_archive_urls" : [ 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/29/",
+              "archive_date" : "2019-03-27T01:08:53.258Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/28/",
+              "archive_date" : "2019-03-27T01:19:57.031Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/27/",
+              "archive_date" : "2019-03-27T01:29:17.269Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/26/",
+              "archive_date" : "2019-03-27T01:43:04.646Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/25/",
+              "archive_date" : "2019-03-27T01:54:48.529Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/24/",
+              "archive_date" : "2019-03-27T11:00:13.841Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/23/",
+              "archive_date" : "2019-03-27T13:58:38.288Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/22/",
+              "archive_date" : "2019-03-27T14:11:27.472Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/21/",
+              "archive_date" : "2019-03-27T17:28:32.176Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/20/",
+              "archive_date" : "2019-03-27T20:44:31.561Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/19/",
+              "archive_date" : "2019-03-27T20:57:47.933Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/18/",
+              "archive_date" : "2019-03-27T21:11:01.990Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/17/",
+              "archive_date" : "2019-03-27T21:25:23.924Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/16/",
+              "archive_date" : "2019-03-27T21:39:00.778Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/15/",
+              "archive_date" : "2019-03-28T00:39:22.325Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/14/",
+              "archive_date" : "2019-03-28T03:39:07.334Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/13/",
+              "archive_date" : "2019-03-28T06:37:06.124Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/12/",
+              "archive_date" : "2019-03-28T09:37:18.611Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/11/",
+              "archive_date" : "2019-03-28T12:39:53.820Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/10/",
+              "archive_date" : "2019-03-28T15:38:22.000Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/9/",
+              "archive_date" : "2019-03-28T16:14:09.498Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/8/",
+              "archive_date" : "2019-03-28T16:24:29.993Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/7/",
+              "archive_date" : "2019-03-28T16:35:10.786Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/6/",
+              "archive_date" : "2019-03-28T19:47:28.050Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/5/",
+              "archive_date" : "2019-03-28T19:58:33.151Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/4/",
+              "archive_date" : "2019-03-28T20:08:53.343Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/3/",
+              "archive_date" : "2019-03-28T20:18:53.448Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/2/",
+              "archive_date" : "2019-03-28T20:27:28.700Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/1/",
+              "archive_date" : "2019-03-28T20:38:18.273Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/30/",
+              "archive_date" : "2019-04-02T00:18:00.184Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/31/",
+              "archive_date" : "2019-04-09T01:27:45.372Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/32/",
+              "archive_date" : "2019-04-16T08:46:12.002Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/33/",
+              "archive_date" : "2019-04-23T01:22:02.325Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/34/",
+              "archive_date" : "2019-04-30T18:06:04.506Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/35/",
+              "archive_date" : "2019-05-07T12:43:19.014Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/37/",
+              "archive_date" : "2019-05-26T23:02:04.758Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/36/",
+              "archive_date" : "2019-05-27T01:48:13.301Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/38/",
+              "archive_date" : "2019-05-28T01:40:27.827Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/39/",
+              "archive_date" : "2019-06-05T19:45:55.751Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/40/",
+              "archive_date" : "2019-06-12T23:35:28.322Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/41/",
+              "archive_date" : "2019-06-18T00:43:55.630Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/42/",
+              "archive_date" : "2019-06-25T01:08:14.712Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/43/",
+              "archive_date" : "2019-07-02T00:23:36.200Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/44/",
+              "archive_date" : "2019-07-09T09:14:26.664Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/51/",
+              "archive_date" : "2019-08-28T10:54:39.933Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/50/",
+              "archive_date" : "2019-08-28T12:20:58.790Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/49/",
+              "archive_date" : "2019-08-28T12:56:53.177Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/48/",
+              "archive_date" : "2019-08-28T13:29:57.236Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/47/",
+              "archive_date" : "2019-08-28T14:18:44.022Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/46/",
+              "archive_date" : "2019-08-28T15:41:43.267Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/45/",
+              "archive_date" : "2019-08-28T16:43:02.395Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/52/",
+              "archive_date" : "2019-09-02T23:31:18.411Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/53/",
+              "archive_date" : "2019-09-10T01:41:32.942Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/54/",
+              "archive_date" : "2019-09-16T23:19:16.750Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/55/",
+              "archive_date" : "2019-09-23T23:43:18.766Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/56/",
+              "archive_date" : "2019-10-01T02:03:49.549Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/57/",
+              "archive_date" : "2019-10-07T23:18:11.600Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/58/",
+              "archive_date" : "2019-10-14T22:29:50.511Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/59/",
+              "archive_date" : "2019-10-25T16:13:07.276Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/61/",
+              "archive_date" : "2019-11-07T13:30:46.956Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/60/",
+              "archive_date" : "2019-11-07T15:01:31.278Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/62/",
+              "archive_date" : "2019-11-12T00:03:33.481Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/63/",
+              "archive_date" : "2019-11-19T03:08:17.878Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/64/",
+              "archive_date" : "2019-11-25T22:33:04.918Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/65/",
+              "archive_date" : "2019-12-02T22:36:04.702Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/66/",
+              "archive_date" : "2019-12-10T03:07:02.186Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/67/",
+              "archive_date" : "2019-12-17T01:36:23.753Z"
+          }, 
+          {
+              "archive_url" : "https://www.densediscovery.com/archive/68/",
+              "archive_date" : "2019-12-24T01:36:30.531Z"
+          }
+      ],
+      "previous_pull" : "2020-01-03T01:35:27.876Z",
+      "error_on_latest" : false,
+      "links_on_latest" : null,
+      "previous_count" : null,
+      "previous_selection" : "2019-11-06T03:01:12.600Z",
+      "selections_on_latest" : 0
+  },
+  "boolean_settings" : {
+      "is_aggregator" : true,
+      "is_indirect" : false,
+      "is_archive" : true
+  },
+  "channel_url" : "https://www.densediscovery.com/archive/",
+  "curator_section_input" : {
+      "beginning_identifier" : "Food For Thought",
+      "end_identifier" : "Aesthetically Pleasing"
+  },
+  "curator_archive_input" : {
+      "latest_link_number" : 1,
+      "opening_url" : "",
+      "archive_identifier_slug" : "https://www.densediscovery.com/archive/"
+  }
+}

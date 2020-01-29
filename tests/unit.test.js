@@ -1,13 +1,15 @@
 const chai = require('chai')
-// const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 const chaiAsPromised = require('chai-as-promised')
 const expect = require('chai').expect
 const should = require('chai').should()
 chai.use(chaiAsPromised).should()
 
-// require ('../config/connection')
-const {master} = require ('../svc')
 
+require ('../config/connection')
+const {master} = require ('../svc')
+const {processLatest} = require('../svc/processLatest')
+const {getTestData} = require('./getTestData')
 // beforeEach(async () => {
 //     const db = mongoose.connection
 //     db.on('error', console.error.bind(console, 'connection error'))
@@ -20,20 +22,18 @@ const defaultTimeout = 60 * 1000
 
 describe('TEST: .... ||', () => {
     it('...', async () => {
-        const inputUrl = 'https://www.theatlantic.com/ideas/archive/2020/01/political-hobbyists-are-ruining-politics/605212/'
+        const archive_url = 'https://www.densediscovery.com/archive/72/'
         
+        const channel = getTestData('dense_discovery')
+
+        const {outputLinks} = await processLatest(channel, {archive_url})
         const resultUrls = [
-            'https://www.theatlantic.com/education/archive/2018/11/education-gap-explains-american-politics/575113/',
-            'https://www.theatlantic.com/ideas/archive/2020/01/political-hobbyists-are-ruining-politics/605212/',
-            'https://www.theatlantic.com/politics/archive/2020/01/democrats-should-be-worried-about-latino-vote/604882/',
-            'https://www.people-press.org/2018/08/09/an-examination-of-the-2016-electorate-based-on-validated-voters/',
-            'https://www.theatlantic.com/education/archive/2018/11/education-gap-explains-american-politics/575113/',
-            'https://www.simonandschuster.com/books/Politics-Is-for-Power/Eitan-Hersh/9781982116781',
-            'https://www.penguinrandomhouse.com/books/74220/black-power-by-kwame-ture/',
+            'https://medium.com/@alexstamos/techs-adversaries-vs-enemies-a5ca09e09aca',
+            'https://www.theatlantic.com/magazine/archive/2020/01/before-zuckerberg-gutenberg/603034/',
+            'https://edition.cnn.com/interactive/2019/05/europe/finland-fake-news-intl/'
         ]
-        const response = await master(inputUrl)
-        expect(response).to.be.an('array').that.includes(resultUrls[0])
-        expect(response).to.be.an('array').that.includes(resultUrls[1])
-        expect(response).to.be.an('array').that.includes(resultUrls[2])
+        expect(outputLinks).to.be.an('array').that.includes(resultUrls[0])
+        expect(outputLinks).to.be.an('array').that.includes(resultUrls[1])
+        expect(outputLinks).to.be.an('array').that.includes(resultUrls[2])
     }).timeout(defaultTimeout)
 })

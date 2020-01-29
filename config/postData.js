@@ -4,10 +4,13 @@ const {ports} = require('./')
 module.exports = postData
 
 async function postData (type, data, forceProdEnv) {
+  const url = getApiUrl (type, forceProdEnv)
+  console.log({data, url})
+  
   try {
     const response = await axios({
       method: 'post',
-      url: getApiUrl (type, forceProdEnv),
+      url,
       timeout: 1 * 60 * 1000, // 1 minute,
       data,
     })
