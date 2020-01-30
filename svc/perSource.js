@@ -1,26 +1,31 @@
 'use strict'
 const {postData} = require('../config')
 const {updateSource} = require('./updateSource')
+console.log({postData})
 
-async function perSource (source, type) {
+async function perSource (source, source_type) {
     const {source_url} = source
-    const data = {
+    const dataForLinks = {
         url: source_url,
-        options: getOptions (source, type)
+        options: getOptions (source, source_type)
     }
-    let links = await postData('helper-links', data)
+    let links = await postData('helper-links', dataForLinks)
     if (source_url.includes('getpocket.com/explore/trending')) {
         links = convertPocketTrendingLinks (links)
     }
+
+
+    postData('scanner', {source_url, source_type, links})
     // console.log({links, data})
-    return updateSource(source, {links})
+    updateSource(source, {links})
+    return
 }
 
-function getOptions (source, type) {
+function getOptions (source, source_type) {
     const {source_url, filtering} = source
     const options = filtering
     options.remove_short_links = removeShortLinks (source_url)
-    if (type === 'slugs' && !options.link_includer) {
+    if (source_type === 'slugs' && !options.link_includer) {
         options.link_includer = addLinkIncluder (source)
     }
     return options

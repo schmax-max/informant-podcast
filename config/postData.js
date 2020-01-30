@@ -4,6 +4,7 @@ const {ports} = require('./')
 module.exports = postData
 
 async function postData (type, data, forceProdEnv) {
+  console.log(`in postData for ${type}`)
   const url = getApiUrl (type, forceProdEnv)
   // console.log({data, url})
   

@@ -2,7 +2,6 @@
 const axios = require('axios')
 const URL = require('url')
 
-
 const {Source} = require('../model')
 
 module.exports = {master}
@@ -12,9 +11,7 @@ async function master (body = {}) {
   perType(type)
 }
 
-
-
-async function perType (type = 'curators') {
+async function perType (type = 'publishers') {
   try {
     const find = {'boolean_settings.is_ineffective': false}
     const sources = await Source[type].find()
@@ -23,7 +20,7 @@ async function perType (type = 'curators') {
     for (let i=0; i<iterations; i++) {
       const source = sources[i]
       const {perSource} = require('./perSource')
-      const response = await perSource(source, type)
+      await perSource(source, type)
     }
   } catch(e) {
     console.log({e})

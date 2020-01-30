@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {master} = require('../../svc');
-const {service} = require('../');
+const service = require('../service');
 
 router.post(`/${service}`, trigger);
 
