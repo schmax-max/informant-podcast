@@ -3,31 +3,39 @@ const {ports} = require('./')
 
 module.exports = postData
 
-async function postData (type, data, forceProdEnv) {
-  console.log(`in postData for ${type}`)
-  const url = getApiUrl (type, forceProdEnv)
-  // console.log({data, url})
-  
+async function postData ({project, type = '-', data, mins = 0.01, forceProdEnv}) {
+  console.log({data})
+  const url = getApiUrl (project, type, forceProdEnv)
   try {
     const response = await axios({
       method: 'post',
       url,
-      timeout: 1 * 60 * 1000, // 1 minute,
+      timeout: mins * 60 * 1000,
       data,
     })
     return response.data
   } catch(e) {
-    console.log({e})
+    let code, status, url
+
+    ({code} = e)
+    if (e.response) {
+      ({status} = e.response)
+    }
+    if (e.config) {
+      ({url} = e.config)
+    }
+    console.log(`error with postData for ${project}`)
+    console.log({status, code, url})
     return
   }
 }
 
-function getApiUrl (type, forceProdEnv) {
-  const port = ports[type]
+function getApiUrl (project, type, forceProdEnv) {
+  const port = ports[project]
 
   const apis = {
-    production: `https://${type}-dot-alexandria-core.appspot.com/${type}`,
-    local: `http://localhost:${port}/${type}`,
+    production: `https://${project}-dot-alexandria-core.appspot.com/${project}/${type}`,
+    local: `http://localhost:${port}/${project}/${type}`,
   }
  
   let env = process.env.NODE_ENV

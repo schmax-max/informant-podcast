@@ -6,7 +6,8 @@ const service = require('../service');
 router.post(`/${service}/:type`, trigger);
 
 async function trigger (req, res, next) {
-  const response = await master(req.params)
+  console.log(`${service} triggered by ${req.params.type}`)
+  const response = await master(req)
   res.send(response)
 }
 

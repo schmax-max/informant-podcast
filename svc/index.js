@@ -1,17 +1,21 @@
 'use strict'
-const axios = require('axios')
-const URL = require('url')
+const Joi = require('@hapi/joi');
 
+const {validateReq} = require('./validateReq')
 const {Source} = require('../model')
 
-module.exports = {master}
+module.exports = {master, commander}
 
-async function master (body = {}) {
-  const {type} = body
-  perType(type)
+async function master (req = {}) {
+  if (validateReq (req)) {
+    return await commander(req.params)
+  } else {
+    return
+  }
+  
 }
 
-async function perType (type = 'publishers') {
+async function commander ({type}) {
   try {
     const find = {'boolean_settings.is_ineffective': false}
     const sources = await Source[type].find()

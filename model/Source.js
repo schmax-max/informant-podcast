@@ -38,7 +38,6 @@ const schema = new mongoose.Schema( {
 schema.set('toJSON', { virtuals: true });
 
 module.exports = {
-    newsletters: mongoose.model(`source_newsletters`, schema),
     curators: mongoose.model(`source_curators`, schema),
     publishers: mongoose.model(`source_publishers`, schema),
     slugs: mongoose.model(`source_slugs`, schema),

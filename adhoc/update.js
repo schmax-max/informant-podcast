@@ -5,7 +5,7 @@ module.exports = update
 
 async function update () {
   console.log('in update')
-  console.log({Source})
+  // console.log({Source})
   for (const type in Source) {
     
     const options = {upsert: true, new: true}

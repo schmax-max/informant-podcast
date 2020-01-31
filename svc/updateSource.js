@@ -12,7 +12,7 @@ function updateSource (source, response) {
       const {hostname} = URL.parse(source.source_url)
       source.source_domain = hostname
     }
-    console.log({source})
+    // console.log({source})
     updatePreviousPull (source, response)
     source.markModified('process_flags')
     return source.save((error, updatedSource) => {

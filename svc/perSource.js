@@ -1,21 +1,33 @@
 'use strict'
 const {postData} = require('../config')
 const {updateSource} = require('./updateSource')
-console.log({postData})
 
 async function perSource (source, source_type) {
+    // console.log({source_type})
     const {source_url} = source
-    const dataForLinks = {
-        url: source_url,
-        options: getOptions (source, source_type)
+    const linksConfig = {
+        project: `helper-links`, 
+        data: {
+            url: source_url,
+            options: getOptions (source, source_type)
+        },
+        type: `informant-snapshot-${source_type}`,
+        mins: 1
     }
-    let links = await postData('helper-links', dataForLinks)
+
+    let links = await postData(linksConfig)
+    console.log({links})
     if (source_url.includes('getpocket.com/explore/trending')) {
         links = convertPocketTrendingLinks (links)
     }
 
+    const scannerConfig = {
+        project: `scanner`, 
+        data: {source_url, source_type, links},
+        type: source_type
+    }
 
-    postData('scanner', {source_url, source_type, links})
+    postData(scannerConfig)
     // console.log({links, data})
     updateSource(source, {links})
     return
