@@ -1,0 +1,50 @@
+cron:
+ - description: 'triggering snapshot'
+   url: /snapshot/publishers
+   target: informant-snapshot
+   schedule: every 90 minutes from 0:00 to 23:59
+#  - description: 'triggering nuzzel'
+#    url: /algo/nuzzel
+#    target: core-algo-nuzzel
+#    schedule: every 4 hours from 0:00 to 23:59
+#  - description: 'triggering slug'
+#    url: /algo/slug
+#    target: core-algo-slug
+#    schedule: every 90 minutes from 0:00 to 23:59
+#  - description: 'triggering scores'
+#    url: /algo/scores
+#    target: core-algo-scores
+#    schedule: every 30 mins from 0:00 to 23:59
+#  - description: 'triggering extract 0'
+#    url: /algo/extract/0
+#    target: core-algo-extract-0
+#    schedule: every 30 mins from 0:00 to 23:59
+#  - description: 'triggering extract 1'
+#    url: /algo/extract/1
+#    target: core-algo-extract-1
+#    schedule: every 30 mins from 0:00 to 23:59
+#  - description: 'triggering extract 2'
+#    url: /algo/extract/2
+#    target: core-algo-extract-2
+#    schedule: every 30 mins from 0:00 to 23:59
+#  - description: 'triggering extract 3'
+#    url: /algo/extract/3
+#    target: core-algo-extract-3
+#    schedule: every 30 mins from 0:00 to 23:59
+#  - description: 'triggering extract 9'
+#    url: /algo/extract/9
+#    target: core-algo-extract-9
+#    schedule: every 30 mins from 0:00 to 23:59
+#  - description: 'triggering extract C'
+#    url: /algo/extract/c
+#    target: core-algo-extract-c
+#    schedule: every 30 mins from 0:00 to 23:59
+
+ # - description: 'triggering extract C 0'
+ #   url: /algo/extract/c/0
+ #   target: core-algo-extract-c-0
+ #   schedule: every 30 mins from 0:00 to 23:59
+ # - description: 'triggering extract C 9'
+ #   url: /algo/extract/c/9
+ #   target: core-algo-extract-c-9
+ #   schedule: every 30 mins from 0:00 to 23:59
