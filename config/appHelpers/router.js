@@ -3,7 +3,7 @@ const router = express.Router();
 const {master} = require('../../svc');
 const service = require('../service');
 
-router.post(`/${service}/:type`, trigger);
+router.get(`/${service}/:type`, trigger);
 
 async function trigger (req, res, next) {
   console.log(`${service} triggered by ${req.params.type}`)

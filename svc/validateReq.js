@@ -15,12 +15,16 @@ function validateReq (req = {}) {
     console.log({bodyError})
   }
 
+  // printValidation (valid)
+  return valid
+}
+
+function printValidation (valid) {
   if (valid) {
     console.log('request validated')
   } else {
     console.log('invalid request')
   }
-  return valid
 }
 
 const paramsSchema = Joi.object({
