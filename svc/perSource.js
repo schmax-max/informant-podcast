@@ -3,7 +3,8 @@ const {postData} = require('../config')
 const {updateSource} = require('./updateSource')
 
 async function perSource (source, source_type) {
-    // console.log({source_type})
+    console.log('starting perSource')
+    console.log({source})
     const {source_url} = source
     const linksConfig = {
         project: `helper-links`, 
@@ -16,7 +17,6 @@ async function perSource (source, source_type) {
     }
 
     let links = await postData(linksConfig)
-    console.log({links})
     if (source_url.includes('getpocket.com/explore/trending')) {
         links = convertPocketTrendingLinks (links)
     }

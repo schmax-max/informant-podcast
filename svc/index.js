@@ -16,6 +16,7 @@ async function master (req = {}) {
 }
 
 async function commander ({type}) {
+  console.log('starting commander')
   try {
     const find = {'boolean_settings.is_ineffective': false}
     const sources = await Source[type].find()

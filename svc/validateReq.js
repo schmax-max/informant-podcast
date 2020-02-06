@@ -14,6 +14,12 @@ function validateReq (req = {}) {
     valid = false
     console.log({bodyError})
   }
+
+  if (valid) {
+    console.log('request validated')
+  } else {
+    console.log('invalid request')
+  }
   return valid
 }
 
