@@ -1,11 +1,12 @@
 const axios = require('axios')
 const ports = require('./ports')
+const service = require('./service')
 module.exports = postData
 
-async function postData ({project, type = '-', data, mins = 0.01}) {
+async function postData ({target, trigger = service, data, mins = 0.01}) {
   // console.log({data})
-  const enableLocal = false
-  const url = getApiUrl (project, type, enableLocal)
+  
+  const url = getApiUrl (target, trigger)
   try {
     const response = await axios({
       method: 'post',
@@ -24,24 +25,44 @@ async function postData ({project, type = '-', data, mins = 0.01}) {
     if (e.config) {
       ({url} = e.config)
     }
-    console.log(`error with postData for ${project}`)
-    console.log({status, code, url})
+    console.log(`error with postData for ${target}`)
+    console.log({status, code, url, e})
     return
   }
 }
 
-function getApiUrl (project, type, enableLocal) {
-
+function getApiUrl (target, trigger) {
   const apis = {
-    production: `https://${project}-dot-alexandria-core.appspot.com/${project}/${type}`,
-    local: `http://localhost:${ports[project]}/${project}/${type}`,
+    production: `https://${target}-dot-alexandria-core.appspot.com/${target}/${trigger}`,
+    local: `http://localhost:${ports[target]}/${target}/${trigger}`,
   }
  
   let env = 'production'
-  if (enableLocal) {
+  if (enableLocal (target)) {
     env = process.env.NODE_ENV || 'local'
   }
 
   return apis[env]
 }
 
+function enableLocal (target) {
+  let res = false
+  const locals = [
+    // 'informant-snapshot',
+    // 'informant-newsletter',
+    // 'informant-mbfc',
+    // 'informant-twitter',
+    'scanner',
+    'calculator',
+    'librarian',
+    // 'helper-date',
+    // 'helper-links',
+    // 'editor-bbh',
+    // 'editor-search',
+    'editor-noisefree',
+  ]
+  if (locals.indexOf(target) > -1) {
+    res = true
+  }
+  return res
+}

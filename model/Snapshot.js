@@ -37,9 +37,18 @@ const schema = new mongoose.Schema( {
 
 schema.set('toJSON', { virtuals: true });
 
-module.exports = {
-    curators: mongoose.model(`source_curators`, schema),
-    publishers: mongoose.model(`source_publishers`, schema),
-    slugs: mongoose.model(`source_slugs`, schema),
-    photos: mongoose.model(`source_photos`, schema),
-};
+module.exports = createModels()
+
+function createModels () {
+    const collections = [
+        'curators',
+        'publishers',
+        'slugs',
+        'photos',
+    ]
+    const models = {}
+    collections.forEach((collection) => {
+        models[collection] = mongoose.model(`snapshot_${collection}`, schema, `snapshot_${collection}`)
+    })
+    return models
+}

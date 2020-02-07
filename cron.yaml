@@ -1,10 +1,10 @@
 cron:
- - description: 'triggering snapshot'
-   url: /informant-snapshot/publishers
-   target: informant-snapshot
-   schedule: every 90 minutes from 0:00 to 23:59
- - description: 'triggering curator'
-   url: /algo/curator
-   target: core-algo-curator
-   schedule: every 90 minutes from 0:00 to 23:59
+#  - description: 'triggering snapshot'
+#    url: /informant-snapshot/publishers
+#    target: informant-snapshot
+#    schedule: every 90 minutes from 0:00 to 23:59
+#  - description: 'triggering curator'
+#    url: /algo/curator
+#    target: core-algo-curator
+#    schedule: every 90 minutes from 0:00 to 23:59
 

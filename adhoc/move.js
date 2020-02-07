@@ -1,4 +1,4 @@
-const {Source} = require('../model')
+const {Snapshot} = require('../model')
 module.exports = {move}
 const urls = [
   
@@ -14,7 +14,7 @@ async function move () {
 
 
   
-  const backups = await Source.others.find(find)
+  const backups = await Snapshot.others.find(find)
   // 
   let iterations = backups.length
   // console.log({iterations})
@@ -31,7 +31,7 @@ async function move () {
       item.process_flags = {} 
       const {source_url} = item
       const options = {upsert: true, new: true}
-      // const source = await Source.photos.findOneAndUpdate({source_url}, item, options)
+      // const source = await Snapshot.photos.findOneAndUpdate({source_url}, item, options)
       // console.log({source})
     } catch(e) {
       console.log({e})

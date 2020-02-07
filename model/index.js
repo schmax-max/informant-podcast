@@ -1,1 +1,1 @@
-exports.Source = require("./Source");
+exports.Snapshot = require("./Snapshot");

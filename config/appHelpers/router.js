@@ -3,10 +3,10 @@ const router = express.Router();
 const {master} = require('../../svc');
 const service = require('../service');
 
-router.get(`/${service}/:type`, trigger);
+router.get(`/${service}/:trigger`, trigger);
 
 async function trigger (req, res, next) {
-  console.log(`${service} triggered by ${req.params.type}`)
+  console.log(`${service} triggered by ${req.params.trigger}`)
   const response = await master(req)
   res.send(response)
 }

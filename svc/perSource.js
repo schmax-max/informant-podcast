@@ -2,17 +2,17 @@
 const {postData} = require('../config')
 const {updateSource} = require('./updateSource')
 
-async function perSource (source, source_type) {
+async function perSource (source, trigger) {
     console.log(`starting perSource for ${source.name}`)
     // console.log({source})
     const {source_url} = source
     const linksConfig = {
-        project: `helper-links`, 
+        target: `helper-links`, 
         data: {
             url: source_url,
-            options: getOptions (source, source_type)
+            options: getOptions (source, trigger)
         },
-        type: `informant-snapshot-${source_type}`,
+        trigger: `informant-snapshot-${trigger}`,
         mins: 1
     }
 
@@ -22,9 +22,8 @@ async function perSource (source, source_type) {
     }
 
     const scannerConfig = {
-        project: `scanner`, 
-        data: {source_url, source_type, links},
-        type: source_type
+        target: `scanner`, 
+        data: {source_url, source_type: `snapshot_${trigger}`, links},
     }
 
     postData(scannerConfig)
