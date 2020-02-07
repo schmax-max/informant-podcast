@@ -1,10 +1,10 @@
 const axios = require('axios')
-const {ports} = require('./')
+const ports = require('./ports')
 
 module.exports = postData
 
 async function postData ({project, type = '-', data, mins = 0.01, forceProdEnv}) {
-  console.log({data})
+  // console.log({data})
   const url = getApiUrl (project, type, forceProdEnv)
   try {
     const response = await axios({
