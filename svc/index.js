@@ -22,7 +22,7 @@ async function commander ({type}) {
     const find = {'boolean_settings.is_ineffective': false}
     const sources = await Source[type].find()
     let iterations = sources.length
-    iterations = 1
+    // iterations = 1
     for (let i=0; i<iterations; i++) {
       const source = sources[i]
       const {perSource} = require('./perSource')

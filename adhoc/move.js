@@ -17,7 +17,7 @@ async function move () {
   const backups = await Source.others.find(find)
   // 
   let iterations = backups.length
-  console.log({iterations})
+  // console.log({iterations})
   // iterations = 1
   for (let i=0; i<iterations; i++) {
     const item = backups[i]
