@@ -1,14 +1,14 @@
 'use strict'
 const Joi = require('@hapi/joi');
 
-const {validateReq} = require('./validateReq')
+const {gateway} = require('./gateway')
 const {Source} = require('../model')
 
 module.exports = {master, commander}
 
 async function master (req = {}) {
   console.log('starting master')
-  if (validateReq (req)) {
+  if (gateway (req)) {
     return await commander(req.params)
   } else {
     return

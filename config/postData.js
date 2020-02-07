@@ -1,11 +1,11 @@
 const axios = require('axios')
 const ports = require('./ports')
-
 module.exports = postData
 
-async function postData ({project, type = '-', data, mins = 0.01, forceProdEnv}) {
+async function postData ({project, type = '-', data, mins = 0.01}) {
   // console.log({data})
-  const url = getApiUrl (project, type, forceProdEnv)
+  const enableLocal = false
+  const url = getApiUrl (project, type, enableLocal)
   try {
     const response = await axios({
       method: 'post',
@@ -30,19 +30,18 @@ async function postData ({project, type = '-', data, mins = 0.01, forceProdEnv})
   }
 }
 
-function getApiUrl (project, type, forceProdEnv) {
-  const port = ports[project]
+function getApiUrl (project, type, enableLocal) {
 
   const apis = {
     production: `https://${project}-dot-alexandria-core.appspot.com/${project}/${type}`,
-    local: `http://localhost:${port}/${project}/${type}`,
+    local: `http://localhost:${ports[project]}/${project}/${type}`,
   }
  
-  let env = process.env.NODE_ENV
-  if (forceProdEnv) {
-    env = 'production'
+  let env = 'production'
+  if (enableLocal) {
+    env = process.env.NODE_ENV || 'local'
   }
 
-  return apis[env] || apis.local
+  return apis[env]
 }
 
