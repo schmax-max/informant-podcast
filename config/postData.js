@@ -25,8 +25,13 @@ async function postData ({target, trigger = service, data, mins = 0.01}) {
     if (e.config) {
       ({url} = e.config)
     }
-    console.log(`error with postData for ${target}`)
-    console.log({status, code, url, e})
+
+    if (code === 'ECONNABORTED' && mins === 0.01) {
+      console.log(`intentional early abortion for ${target}`)
+    } else {
+      console.log(`error with postData for ${target}`)
+      console.log({status, code, url})
+    }
     return
   }
 }
@@ -50,7 +55,7 @@ function enableLocal (target) {
   const locals = [
     // 'informant-snapshot',
     // 'informant-newsletter',
-    // 'informant-mbfc',
+    // 'informant-bubble',
     // 'informant-twitter',
     'scanner',
     'calculator',
