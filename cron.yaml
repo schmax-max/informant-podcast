@@ -35,16 +35,16 @@ cron:
    url: /informant-bubble/center
    target: informant-bubble
    schedule: every 6 hours from 2:00 to 23:59
- - description: 'bubble left-center'
-   url: /informant-bubble/left-center
+ - description: 'bubble left_center'
+   url: /informant-bubble/left_center
    target: informant-bubble
    schedule: every 6 hours from 2:15 to 23:59
- - description: 'bubble right-center'
-   url: /informant-bubble/right-center
+ - description: 'bubble right_center'
+   url: /informant-bubble/right_center
    target: informant-bubble
    schedule: every 6 hours from 2:30 to 23:59
- - description: 'bubble pro-science'
-   url: /informant-bubble/pro-science
+ - description: 'bubble pro_science'
+   url: /informant-bubble/pro_science
    target: informant-bubble
    schedule: every 6 hours from 2:45 to 23:59
 

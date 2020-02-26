@@ -1,0 +1,1 @@
+exports.SnapshotType = require("./SnapshotType");
