@@ -11,7 +11,7 @@ const { SnapshotType } = require("./types");
 const Mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: () => ({
-    fetchSnapshotSources: {
+    fetchSources: {
       type: GraphQLList(SnapshotType),
       args: {
         name: { type: new GraphQLNonNull(GraphQLString) },

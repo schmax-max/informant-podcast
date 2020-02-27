@@ -18,7 +18,7 @@ const SnapshotType = new GraphQLObjectType({
     source_url: { type: GraphQLString },
     source_domain: { type: GraphQLString },
     filtering: { type: FilteringType },
-    process_flags: { type: ProcessFlagType }
+    previous_pull: { type: PreviousPullType }
   })
 });
 
@@ -29,13 +29,6 @@ const FilteringType = new GraphQLObjectType({
     beginning_identifier: { type: GraphQLString },
     link_includer: { type: GraphQLString },
     link_excluder: { type: GraphQLString }
-  })
-});
-
-const ProcessFlagType = new GraphQLObjectType({
-  name: "ProcessFlagType",
-  fields: () => ({
-    previous_pull: { type: PreviousPullType }
   })
 });
 

@@ -11,7 +11,7 @@ const { SnapshotType } = require("./types");
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: () => ({
-    fetchSnapshotSources: {
+    fetchSources: {
       type: GraphQLList(SnapshotType),
       args: {
         type: { type: new GraphQLNonNull(GraphQLString) }
