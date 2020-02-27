@@ -3,22 +3,24 @@ const {
   GraphQLList,
   GraphQLString,
   GraphQLID,
-  GraphQLNonNull
+  GraphQLNonNull,
+  GraphQLInputObjectType
 } = require("graphql");
 const { Snapshot } = require("../model");
-const { SnapshotType } = require("./types");
+const { SnapshotType, SourceObjectType } = require("./types");
 
 const Mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: () => ({
-    fetchSources: {
-      type: GraphQLList(SnapshotType),
+    mutateSource: {
+      type: SnapshotType,
       args: {
-        name: { type: new GraphQLNonNull(GraphQLString) },
-        type: { type: new GraphQLNonNull(GraphQLString) }
+        sourceType: { type: GraphQLNonNull(GraphQLString) },
+        sourceObj: { type: SourceObjectType }
       },
-      resolve(parentValue, args) {
-        // return Snapshot[args][type].find();
+      resolve(parentValue, { sourceType, sourceObj }) {
+        const opt = { upsert: true, new: true };
+        return Snapshot[sourceType].findOneAndUpdate(sourceObj, sourceObj, opt);
       }
     }
   })

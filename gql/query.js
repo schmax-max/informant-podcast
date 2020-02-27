@@ -14,10 +14,10 @@ const RootQuery = new GraphQLObjectType({
     fetchSources: {
       type: GraphQLList(SnapshotType),
       args: {
-        type: { type: new GraphQLNonNull(GraphQLString) }
+        sourceType: { type: new GraphQLNonNull(GraphQLString) }
       },
-      resolve(parentValue, { type }) {
-        return Snapshot[type].find();
+      resolve(parentValue, { sourceType }) {
+        return Snapshot[sourceType].find();
       }
     }
   })
