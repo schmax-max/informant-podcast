@@ -1,2 +1,2 @@
-exports.SnapshotType = require("./SnapshotType");
+exports.SourceType = require("./SourceType");
 exports.SourceObjectType = require("./SourceObjectType");

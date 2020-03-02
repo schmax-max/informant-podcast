@@ -10,15 +10,25 @@ const {
 } = graphql;
 const { Snapshot } = require("../../model");
 
-const SnapshotType = new GraphQLObjectType({
-  name: "SnapshotType",
+const SourceType = new GraphQLObjectType({
+  name: "SourceType",
   fields: () => ({
     _id: { type: GraphQLID },
     name: { type: GraphQLString },
     source_url: { type: GraphQLString },
     source_domain: { type: GraphQLString },
     filtering: { type: FilteringType },
-    previous_pull: { type: PreviousPullType }
+    previous_pull: { type: PreviousPullType },
+    nuzzel: { type: NuzzelType }
+  })
+});
+
+const NuzzelType = new GraphQLObjectType({
+  name: "NuzzelType",
+  fields: () => ({
+    nuzzel_user_name: { type: GraphQLString },
+    nuzzel_user_id: { type: GraphQLString },
+    nuzzel_user_password: { type: GraphQLString }
   })
 });
 
@@ -42,4 +52,4 @@ const PreviousPullType = new GraphQLObjectType({
   })
 });
 
-module.exports = SnapshotType;
+module.exports = SourceType;

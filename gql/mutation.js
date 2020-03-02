@@ -7,13 +7,13 @@ const {
   GraphQLInputObjectType
 } = require("graphql");
 const { Snapshot } = require("../model");
-const { SnapshotType, SourceObjectType } = require("./types");
+const { SourceType, SourceObjectType } = require("./types");
 
 const Mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: () => ({
     mutateSource: {
-      type: SnapshotType,
+      type: SourceType,
       args: {
         sourceType: { type: GraphQLNonNull(GraphQLString) },
         sourceObj: { type: SourceObjectType }
