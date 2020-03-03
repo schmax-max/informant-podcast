@@ -1,2 +1,2 @@
 exports.SourceType = require("./SourceType");
-exports.SourceObjectType = require("./SourceObjectType");
+exports.SourceTypeInput = require("./SourceTypeInput");

@@ -8,7 +8,6 @@ const {
   GraphQLString,
   GraphQLBoolean
 } = graphql;
-const { Snapshot } = require("../../model");
 
 const SourceType = new GraphQLObjectType({
   name: "SourceType",
@@ -19,7 +18,9 @@ const SourceType = new GraphQLObjectType({
     source_domain: { type: GraphQLString },
     filtering: { type: FilteringType },
     previous_pull: { type: PreviousPullType },
-    nuzzel: { type: NuzzelType }
+    nuzzel: { type: NuzzelType },
+    archive: { type: ArchiveType },
+    mbfc_info: { type: MbfcType }
   })
 });
 
@@ -49,6 +50,26 @@ const PreviousPullType = new GraphQLObjectType({
     links_count: { type: GraphQLInt },
     error: { type: GraphQLBoolean },
     links: { type: GraphQLList(GraphQLString) }
+  })
+});
+
+const ArchiveType = new GraphQLObjectType({
+  name: "ArchiveType",
+  fields: () => ({
+    identifier_url: { type: GraphQLString },
+    opening_url: { type: GraphQLString },
+    archive_identifier_slug: { type: GraphQLString },
+    archive_prepend_slug: { type: GraphQLString },
+    latest_link_number: { type: GraphQLInt }
+  })
+});
+
+const MbfcType = new GraphQLObjectType({
+  name: "MbfcType",
+  fields: () => ({
+    bubble: { type: GraphQLString },
+    quality: { type: GraphQLString },
+    country: { type: GraphQLString }
   })
 });
 
