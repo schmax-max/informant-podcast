@@ -28,9 +28,9 @@ function createModels() {
   const models = {};
   collections.forEach(collection => {
     models[collection] = mongoose.model(
-      `youtube_${collection}`,
+      `podcast_${collection}`,
       schema,
-      `youtube_${collection}`
+      `podcast_${collection}`
     );
   });
   return models;

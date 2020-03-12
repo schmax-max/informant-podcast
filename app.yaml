@@ -1,5 +1,5 @@
 runtime: nodejs10
-service: informant-youtube
+service: informant-podcast
 handlers:
   - url: /.*
     secure: always

@@ -1,5 +1,9 @@
 "use strict";
 const axios = require("axios");
+const convert = require("xml-js");
+const Parser = require("rss-parser");
+const parser = new Parser();
+
 const { postData } = require("../config");
 const { updateSource } = require("./updateSource");
 
@@ -8,10 +12,11 @@ async function perSource(source, trigger) {
   // console.log({source})
   const { source_url } = source;
   const coreInfos = await getCoreInfos(source);
+
   const links = coreInfos.map(k => k.content_url);
   const scannerConfig = {
     target: `scanner`,
-    data: { source_url, source_type: `youtube_${trigger}`, links, coreInfos }
+    data: { source_url, source_type: `podcast_${trigger}`, links, coreInfos }
   };
   postData(scannerConfig);
   return;
@@ -19,43 +24,56 @@ async function perSource(source, trigger) {
 
 async function getCoreInfos({ source_url, name }) {
   try {
-    const { data } = await axios.get(source_url);
-    const array = data.split(`class="yt-lockup-title ">`);
-    array.shift();
-    // array = [array[0]];
-    let iterations = array.length;
+    const { items, title } = await parser.parseURL(source_url);
+    // console.log({ title });
+
+    const array = [items[0]];
+
     return array.reduce((arr, item) => {
-      const coreInfo = getInfoPerVideo(item);
-      coreInfo.publisher = name;
+      const coreInfo = getInfoPerPodcast(item);
+      coreInfo.publisher = title;
       arr.push(coreInfo);
       return arr;
     }, []);
-
-    // return coreInfos;
   } catch (e) {
     console.log({ e });
   }
 }
 
-function getInfoPerVideo(htmlMarkup) {
+function getInfoPerPodcast(item) {
   const coreInfo = {};
 
-  const slug = parseInfo(htmlMarkup, `href="`, '"');
-  coreInfo.content_url = `https://www.youtube.com${slug}`;
-  coreInfo.views = parseInt(
-    parseInfo(htmlMarkup, `info"><li>`, " views").replace(",", "")
-  );
-  coreInfo.title = parseInfo(htmlMarkup, `"nofollow">`, "</a>");
-  const minutes = parseInt(parseInfo(htmlMarkup, `Duration: `, " minutes, "));
-  const seconds = parseInt(parseInfo(htmlMarkup, ` minutes, `, " seconds."));
-  let content_minutes = minutes;
-  if (seconds > 29) {
-    content_minutes += 1;
+  coreInfo.title = item.title;
+  coreInfo.content_url = item.enclosure.url;
+  coreInfo.publication_date = item.isoDate;
+  coreInfo.snippet = item.contentSnippet;
+  coreInfo.image = item.itunes.image;
+  coreInfo.content_minutes = getContentMinutes(item.itunes);
+  coreInfo.content_type = "podcast";
+  return coreInfo;
+}
+
+function getContentMinutes({ duration }) {
+  let hours, minutes, seconds;
+  if (duration.includes(":")) {
+    const array = duration.split(":");
+    seconds = array.slice(-1)[0];
+    minutes = array.slice(-2, -1)[0];
+    hours = array.slice(-3, -2)[0];
+  } else {
+    seconds = duration.slice(-2);
+    minutes = duration.slice(-4, -2);
+    hours = duration.slice(-6, -4);
+  }
+  let contentMinutes = parseInt(minutes);
+  if (hours) {
+    contentMinutes += parseInt(hours) * 60;
+  }
+  if (seconds && parseInt(seconds) > 29) {
+    contentMinutes += 1;
   }
 
-  coreInfo.content_minutes = content_minutes;
-  coreInfo.content_type = "video";
-  return coreInfo;
+  return contentMinutes;
 }
 
 function parseInfo(htmlMarkup, pre, post) {

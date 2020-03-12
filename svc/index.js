@@ -1,6 +1,6 @@
 "use strict";
 const { gateway } = require("./gateway");
-const { Youtube } = require("../model");
+const { Podcast } = require("../model");
 
 module.exports = { master, commander };
 
@@ -17,7 +17,7 @@ async function commander({ trigger }) {
   // console.log('starting commander')
   try {
     console.log({ trigger });
-    const sources = await Youtube[trigger].find();
+    const sources = await Podcast[trigger].find();
     let iterations = sources.length;
     // iterations = 1;
     for (let i = 0; i < iterations; i++) {

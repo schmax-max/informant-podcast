@@ -1,1 +1,1 @@
-exports.Youtube = require("./Youtube");
+exports.Podcast = require("./Podcast");

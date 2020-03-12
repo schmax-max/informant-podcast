@@ -1,6 +1,6 @@
 const { GraphQLObjectType, GraphQLString, GraphQLNonNull } = require("graphql");
 const { SourceType, SourceTypeInput } = require("./types");
-const { Youtube } = require("../model");
+const { Podcast } = require("../model");
 
 const Mutation = new GraphQLObjectType({
   name: "Mutation",
@@ -20,7 +20,7 @@ const Mutation = new GraphQLObjectType({
         const { source_url } = sourceObject;
 
         if (sourceType && sourceType.length > 0) {
-          return Youtube[sourceType].findOneAndUpdate(
+          return Podcast[sourceType].findOneAndUpdate(
             { source_url },
             sourceObject,
             opt
