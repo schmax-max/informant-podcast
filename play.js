@@ -1,7 +1,10 @@
-require('./config/connection')
+require("./config/connection");
+const { create } = require("./adhoc");
 
-const {params} = require('./tests/data')
-const {commander} = require('./svc')
-commander(params).then((res) => {
-  console.log({res})
-})
+create();
+
+const { params } = require("./tests/data");
+const { commander } = require("./svc");
+// commander(params).then(res => {
+//   console.log({ res });
+// });

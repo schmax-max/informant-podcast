@@ -5,6 +5,7 @@ const ports = {
   "informant-twitter": 8073,
   "informant-rss": 8074,
   "informant-youtube": 8075,
+  "informant-podcast": 8076,
 
   scanner: 8080,
   calculator: 8081,

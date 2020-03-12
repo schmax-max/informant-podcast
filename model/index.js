@@ -1,1 +1,1 @@
-exports.Snapshot = require("./Snapshot");
+exports.Youtube = require("./Youtube");

@@ -14,23 +14,7 @@ const schema = new mongoose.Schema({
   source_url: {
     type: "string"
   },
-  source_domain: {
-    type: "string"
-  },
-  created_at: {
-    type: "date",
-    format: "date-time"
-  },
-  boolean: {
-    type: "object"
-  },
   previous_pull: {
-    type: "object"
-  },
-  filtering: {
-    type: "object"
-  },
-  archive: {
     type: "object"
   }
 });
@@ -40,13 +24,13 @@ schema.set("toJSON", { virtuals: true });
 module.exports = createModels();
 
 function createModels() {
-  const collections = ["curators", "publishers", "slugs", "photos"];
+  const collections = ["sports"];
   const models = {};
   collections.forEach(collection => {
     models[collection] = mongoose.model(
-      `snapshot_${collection}`,
+      `youtube_${collection}`,
       schema,
-      `snapshot_${collection}`
+      `youtube_${collection}`
     );
   });
   return models;

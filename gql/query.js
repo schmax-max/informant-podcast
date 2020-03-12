@@ -5,7 +5,7 @@ const {
   GraphQLID,
   GraphQLNonNull
 } = require("graphql");
-const { Snapshot } = require("../model");
+const { Youtube } = require("../model");
 const { SourceType } = require("./types");
 
 const RootQuery = new GraphQLObjectType({
@@ -17,7 +17,7 @@ const RootQuery = new GraphQLObjectType({
         sourceType: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve(parentValue, { sourceType }) {
-        return Snapshot[sourceType].find();
+        return Youtube[sourceType].find();
       }
     }
   })
