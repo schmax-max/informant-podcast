@@ -1,0 +1,11 @@
+{
+  "source_url": "https://www.theamericanconservative.com",
+  "__v": 2,
+  "_type": "CuratorChannel",
+  "filtering": {
+    "number_of_links": 5,
+    "end_identifier": "",
+    "beginning_identifier": "Most Read</h"
+  },
+  "name": "american conservative most popular"
+}
