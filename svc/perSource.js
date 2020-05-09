@@ -13,10 +13,11 @@ async function perSource(source, trigger) {
   const { source_url } = source;
   const coreInfos = await getCoreInfos(source);
 
-  const links = coreInfos.map(k => k.content_url);
+  const links = coreInfos.map((k) => k.content_url);
+  console.log({ links });
   const scannerConfig = {
     target: `scanner`,
-    data: { source_url, source_type: `podcast_${trigger}`, links, coreInfos }
+    data: { source_url, source_type: `podcast_${trigger}`, links, coreInfos },
   };
   postData(scannerConfig);
   return;
@@ -84,5 +85,5 @@ function parseInfo(htmlMarkup, pre, post) {
 }
 
 module.exports = {
-  perSource
+  perSource,
 };
